@@ -10,8 +10,7 @@ body {
   background-repeat: no-repeat;
   
   font-family: 'Quicksand', sans-serif;
-  /* Allows scrolling on phones if needed */
-  overflow-x: hidden;
+  overflow: hidden; /* Prevents scrolling */
   
   /* Flexbox to Center Everything */
   display: flex;
@@ -23,32 +22,30 @@ body {
 .main-wrapper {
   position: relative;
   width: 100vw;
-  min-height: 100vh; /* Ensures full height */
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* Adds padding for smaller screens */
-  box-sizing: border-box;
+  overflow: hidden;
 }
 
-/* --- PHOTO STYLES (Desktop Defaults) --- */
+/* --- PHOTO STYLES --- */
 .floating-photo {
   position: absolute;
-  width: 340px;
+  width: 300px; /* Default Desktop Size */
   height: auto;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.4));
   transition: all 0.6s ease-in-out;
-  z-index: 1;
+  z-index: 1; /* Sits behind the card */
 }
 
-/* Left Photo Position (Desktop) */
+/* Desktop Positions (Diagonal) */
 .left-p { 
   left: 5%;
   bottom: 10%;
   transform: rotate(-8deg); 
 }
 
-/* Right Photo Position (Desktop) */
 .right-p { 
   right: 5%;
   top: 10%;
@@ -57,26 +54,26 @@ body {
 
 /* ZOOM ANIMATION ON SUCCESS */
 .success-zoom {
-  transform: scale(1.1) rotate(0deg) !important; /* !important overrides mobile styles */
+  transform: scale(1.1) rotate(0deg) !important;
   filter: drop-shadow(0 0 25px rgba(255, 64, 129, 0.7));
-  z-index: 20;
+  z-index: 20; /* Brings photo to front on success */
 }
 
 /* --- MAIN CARD CONTAINER --- */
 .app-container {
   position: relative;
-  z-index: 10;
+  z-index: 10; /* Always on top of normal photos */
   
   /* Glassmorphism */
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(12px);
   border-radius: 25px;
   border: 1px solid rgba(255, 255, 255, 0.4);
   box-shadow: 0 15px 35px rgba(0,0,0,0.2);
   
-  padding: 40px;
+  padding: 30px;
   width: 90%;
-  max-width: 420px;
+  max-width: 400px;
   text-align: center;
   animation: fadeIn 1s ease;
 }
@@ -84,31 +81,33 @@ body {
 /* TEXT STYLES */
 h1 {
   font-family: 'Pacifico', cursive;
-  font-size: 3rem;
+  font-size: 2.8rem;
   color: #fff;
   text-shadow: 0 2px 5px rgba(0,0,0,0.3), 0 0 15px rgba(255, 64, 129, 0.5);
-  margin-bottom: 25px;
+  margin-bottom: 20px;
   margin-top: 0;
+  line-height: 1.2;
 }
 
 /* BUTTONS */
 .buttons {
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 15px;
   position: relative;
-  height: 60px;
+  height: 55px;
+  margin-bottom: 10px;
 }
 
 button {
   border: none;
   border-radius: 50px;
-  padding: 12px 35px;
-  font-size: 1.1rem;
+  padding: 10px 30px;
+  font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
   font-family: 'Quicksand', sans-serif;
-  transition: transform 0.2s, background-color 0.2s;
+  transition: transform 0.2s;
 }
 
 .yes-btn {
@@ -119,21 +118,19 @@ button {
 
 .yes-btn:hover {
   transform: scale(1.1);
-  background-color: #f50057;
 }
 
 .no-btn {
   background-color: white;
   color: #ff4081;
-  position: absolute;
+  position: absolute; /* Floating No Button */
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-  transition: all 0.2s ease;
 }
 
 .pleading-text {
   color: #fff;
-  font-size: 1rem;
-  margin-top: 15px;
+  font-size: 0.9rem;
+  margin-top: 10px;
   font-weight: bold;
   text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   animation: heartbeat 1.5s infinite ease-in-out;
@@ -143,7 +140,8 @@ button {
 .guestbook h2 {
   color: #fff;
   text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
 }
 
 .input-group {
@@ -158,54 +156,83 @@ input {
   border: none;
   border-radius: 12px;
   outline: none;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(255, 255, 255, 0.9);
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
   color: #d81b60;
   font-weight: bold;
 }
 
-input::placeholder {
-  color: #f48fb1;
-  font-weight: normal;
-}
-
 .sign-btn {
   width: 100%;
   background-color: #ff80ab;
   color: white;
-  padding: 12px;
-  font-size: 1.1rem;
+  padding: 10px;
+  font-size: 1rem;
   border-radius: 12px;
-}
-
-.sign-btn:hover {
-  background-color: #ff4081;
 }
 
 /* MESSAGE LIST */
 .message-list {
   list-style: none;
   padding: 0;
-  margin-top: 25px;
+  margin-top: 20px;
   text-align: left;
-  max-height: 200px;
+  max-height: 150px;
   overflow-y: auto;
 }
 
 .message-card {
   background: rgba(255, 255, 255, 0.9);
-  padding: 10px 15px;
+  padding: 8px 12px;
   border-radius: 10px;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
+  font-size: 0.9rem;
+  color: #880e4f;
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  color: #880e4f;
-  word-break: break-word; /* Prevents long words from breaking layout */
 }
 
-/* ANIMATIONS */
+/* --- MOBILE RESPONSIVENESS (The Fix) --- */
+@media (max-width: 768px) {
+  
+  /* Keep centered layout */
+  .main-wrapper {
+    flex-direction: row; 
+    overflow: hidden;
+  }
+
+  /* Shrink Card to fit screen */
+  .app-container {
+    width: 85%;
+    padding: 20px;
+  }
+
+  h1 { font-size: 2rem; }
+
+  /* --- MOBILE PHOTOS: Keep Diagonal Layout! --- */
+  .floating-photo {
+    width: 150px; /* Smaller size for phone */
+    opacity: 0.9;
+  }
+
+  /* Right Photo (Me): Top Right Corner */
+  .right-p {
+    top: 5%; 
+    right: -30px; /* Slight overlap off-screen */
+    transform: rotate(15deg);
+  }
+
+  /* Left Photo (Her): Bottom Left Corner */
+  .left-p {
+    bottom: 5%;
+    left: -30px; /* Slight overlap off-screen */
+    transform: rotate(-15deg);
+    margin: 0;
+  }
+}
+
+/* KEYFRAMES */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.95); }
   to { opacity: 1; transform: scale(1); }
@@ -215,58 +242,4 @@ input::placeholder {
   0% { transform: scale(1); }
   50% { transform: scale(1.05); }
   100% { transform: scale(1); }
-}
-
-/* --- MOBILE RESPONSIVENESS --- */
-@media (max-width: 768px) {
-  .main-wrapper {
-    flex-direction: column;
-    justify-content: flex-start;
-    padding-top: 160px; /* Space for top photo */
-    padding-bottom: 160px; /* Space for bottom photo */
-  }
-
-  /* Reposition and resize photos for mobile */
-  .floating-photo {
-    width: 140px; /* Much smaller */
-    left: 50% !important; /* Center them */
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-  }
-
-  /* Top photo */
-  .right-p {
-    top: 30px !important;
-    margin-left: -70px; /* Half of width to center */
-    transform: rotate(5deg);
-  }
-
-  /* Bottom photo */
-  .left-p {
-    bottom: 30px !important;
-    margin-left: -70px; /* Half of width to center */
-    transform: rotate(-5deg);
-  }
-
-  /* Adjust Card for Mobile */
-  .app-container {
-    padding: 25px;
-    width: 85%;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  /* Stack buttons vertically on small screens */
-  .buttons {
-    flex-direction: column;
-    height: auto;
-    gap: 15px;
-  }
-
-  .no-btn {
-    position: static; /* No longer absolute */
-  }
 }
