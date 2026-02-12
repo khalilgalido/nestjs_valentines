@@ -8,7 +8,7 @@ import meBefore from './assets/me1.png';
 import usAfter1 from './assets/us1.png';
 import usAfter2 from './assets/us2.png';
 
-const API_URL = "https://bookish-space-memory-jjv555pqgvj7fqgxq-3000.app.github.dev/guestbook";
+const API_URL = "https://nestjs-valentines-backened.onrender.com/guestbook";
 
 function App() {
   const [accepted, setAccepted] = useState(false);
