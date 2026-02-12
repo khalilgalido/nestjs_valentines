@@ -1,4 +1,4 @@
-/* GLOBAL STYLES */
+/* --- GLOBAL STYLES --- */
 body {
   margin: 0;
   min-height: 100vh;
@@ -10,7 +10,8 @@ body {
   background-repeat: no-repeat;
   
   font-family: 'Quicksand', sans-serif;
-  overflow: hidden; /* Prevents scrollbars */
+  /* Allows scrolling on phones if needed */
+  overflow-x: hidden;
   
   /* Flexbox to Center Everything */
   display: flex;
@@ -22,30 +23,32 @@ body {
 .main-wrapper {
   position: relative;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh; /* Ensures full height */
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px; /* Adds padding for smaller screens */
+  box-sizing: border-box;
 }
 
-/* PHOTO STYLES - INCREASED SIZE */
+/* --- PHOTO STYLES (Desktop Defaults) --- */
 .floating-photo {
   position: absolute;
-  width: 340px;  /* Increased size! */
+  width: 340px;
   height: auto;
-  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4)); /* Stronger shadow for depth */
+  filter: drop-shadow(0 15px 25px rgba(0,0,0,0.4));
   transition: all 0.6s ease-in-out;
-  z-index: 1; /* Behind the card */
+  z-index: 1;
 }
 
-/* Left Photo Position */
+/* Left Photo Position (Desktop) */
 .left-p { 
   left: 5%;
   bottom: 10%;
   transform: rotate(-8deg); 
 }
 
-/* Right Photo Position */
+/* Right Photo Position (Desktop) */
 .right-p { 
   right: 5%;
   top: 10%;
@@ -54,15 +57,15 @@ body {
 
 /* ZOOM ANIMATION ON SUCCESS */
 .success-zoom {
-  transform: scale(1.1) rotate(0deg);
-  filter: drop-shadow(0 0 25px rgba(255, 64, 129, 0.7)); /* Glowing effect */
-  z-index: 20; /* Bring to front on success! */
+  transform: scale(1.1) rotate(0deg) !important; /* !important overrides mobile styles */
+  filter: drop-shadow(0 0 25px rgba(255, 64, 129, 0.7));
+  z-index: 20;
 }
 
-/* MAIN CARD CONTAINER */
+/* --- MAIN CARD CONTAINER --- */
 .app-container {
   position: relative;
-  z-index: 10; /* Normally on top */
+  z-index: 10;
   
   /* Glassmorphism */
   background: rgba(255, 255, 255, 0.25);
@@ -158,7 +161,7 @@ input {
   background: rgba(255, 255, 255, 0.95);
   font-family: 'Quicksand', sans-serif;
   font-size: 1rem;
-  color: #d81b60; /* Hot pink text */
+  color: #d81b60;
   font-weight: bold;
 }
 
@@ -199,13 +202,7 @@ input::placeholder {
   justify-content: space-between;
   align-items: center;
   color: #880e4f;
-}
-
-.delete-btn {
-  background: transparent;
-  color: #ff4081;
-  padding: 5px;
-  font-size: 0.9rem;
+  word-break: break-word; /* Prevents long words from breaking layout */
 }
 
 /* ANIMATIONS */
@@ -220,11 +217,56 @@ input::placeholder {
   100% { transform: scale(1); }
 }
 
-/* MEDIA QUERY FOR PHONES */
+/* --- MOBILE RESPONSIVENESS --- */
 @media (max-width: 768px) {
-  .floating-photo {
-    width: 150px; /* Adjusted mobile size */
+  .main-wrapper {
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 160px; /* Space for top photo */
+    padding-bottom: 160px; /* Space for bottom photo */
   }
-  .left-p { left: -10px; top: 10%; }
-  .right-p { right: -10px; bottom: 5%; }
+
+  /* Reposition and resize photos for mobile */
+  .floating-photo {
+    width: 140px; /* Much smaller */
+    left: 50% !important; /* Center them */
+    right: auto !important;
+    top: auto !important;
+    bottom: auto !important;
+  }
+
+  /* Top photo */
+  .right-p {
+    top: 30px !important;
+    margin-left: -70px; /* Half of width to center */
+    transform: rotate(5deg);
+  }
+
+  /* Bottom photo */
+  .left-p {
+    bottom: 30px !important;
+    margin-left: -70px; /* Half of width to center */
+    transform: rotate(-5deg);
+  }
+
+  /* Adjust Card for Mobile */
+  .app-container {
+    padding: 25px;
+    width: 85%;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  /* Stack buttons vertically on small screens */
+  .buttons {
+    flex-direction: column;
+    height: auto;
+    gap: 15px;
+  }
+
+  .no-btn {
+    position: static; /* No longer absolute */
+  }
 }
