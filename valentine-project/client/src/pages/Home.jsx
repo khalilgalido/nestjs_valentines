@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import videoBg from '../assets/openingscreen.mp4';
+import titleImg from '../assets/KhalilCraft.png'; // <--- Import your new image
 import '../pagescss/Home.css';
 
 function Home() {
@@ -11,7 +12,9 @@ function Home() {
       <div className="video-overlay"></div>
       
       <div className="mc-content">
-        <h1 className="mc-logo">MINECRAFT PROFILE</h1>
+        {/* Replaced text h1 with the image */}
+        <img src={titleImg} alt="KhalilCraft" className="mc-title-img" />
+        
         <p className="mc-subtitle">Rei Khalil S. Galido</p>
 
         <div className="menu-grid">
