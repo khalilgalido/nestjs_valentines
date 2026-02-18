@@ -67,3 +67,81 @@
   margin-top: 0;
   margin-bottom: 40px;
 }
+
+/* ... (Keep all your existing CSS above) ... */
+
+
+/* --- NEW CHARACTER SWITCHER STYLES --- */
+
+.character-display {
+  position: absolute;
+  right: 10%;          /* 10% from the right side */
+  bottom: 10%;         /* 10% from the bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 10;         /* Sits on top of video and overlay */
+}
+
+/* The Character Image */
+.char-skin {
+  height: 45vh;             /* Takes up 45% of screen height */
+  min-height: 300px;
+  image-rendering: pixelated; /* Keeps pixel art sharp */
+  filter: drop-shadow(5px 5px 0px rgba(0,0,0,0.5));
+  
+  /* Optional: Gentle breathing animation */
+  animation: char-breathe 4s ease-in-out infinite;
+}
+
+@keyframes char-breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* The Name Tag */
+.char-nametag {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  padding: 5px 15px;
+  font-family: 'VT323', monospace;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  text-shadow: 2px 2px 0px black;
+  border: 2px solid #000;
+}
+
+/* The Hanger Button */
+.hanger-btn {
+  margin-top: 15px;
+  background-color: #7d7d7d;
+  border: 2px solid;
+  border-color: #ffffff #3f3f3f #3f3f3f #ffffff; /* 3D effect */
+  width: 60px;
+  height: 60px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hanger-btn:active {
+  background-color: #5c5c5c;
+  border-color: #3f3f3f #ffffff #ffffff #3f3f3f;
+}
+
+.hanger-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  image-rendering: pixelated;
+}
+
+/* Hide character on small phones so it doesn't block buttons */
+@media (max-width: 800px) {
+  .character-display {
+    display: none;
+  }
+}
