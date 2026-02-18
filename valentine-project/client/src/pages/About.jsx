@@ -2,14 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../pagescss/About.css';
 
-// --- IMPORT CHARACTERS ---
+// --- IMPORT YOUR CHARACTER IMAGES ---
+// Make sure these files exist in your assets folder!
 import char1 from '../assets/char1.png';
 import char2 from '../assets/char2.png';
 import char3 from '../assets/char3.png';
 
 function About() {
+  // Default to first character
   const [skin, setSkin] = useState(char1);
-  const [skinName, setSkinName] = useState("Steve");
+  const [skinName, setSkinName] = useState("Viltrumite Lil");
 
   // --- SKILL DATA (Name + Funny Stat) ---
   const skills = [
@@ -21,6 +23,7 @@ function About() {
     { name: "Supabase", icon: "☁️", stat: "Instant DB Magic" }
   ];
 
+  // --- CHECK MEMORY ON LOAD ---
   useEffect(() => {
     const savedIndex = localStorage.getItem('selectedSkin');
     if (savedIndex) {
@@ -38,15 +41,16 @@ function About() {
         
         <div className="about-split-layout">
           
-          {/* LEFT SIDE */}
+          {/* --- LEFT SIDE --- */}
           <div className="about-column left-col">
             <div className="avatar-row">
               <div className="avatar-box">
                 <img src={skin} alt="Skin" className="about-skin" />
                 <div className="gamertag">{skinName}</div>
               </div>
+              
               <div className="stats-text">
-                <p><strong>Name:</strong> Khalil <Galido></Galido> 👨</p>
+                <p><strong>Name:</strong> Khalil Galido 👨</p>
                 <p><strong>Class:</strong> Lazy Developer 👨‍💻</p>
                 <p><strong>Level:</strong> IT Student (Lvl 20)</p>
                 <p><strong>Guild:</strong> Taguig City</p>
@@ -72,14 +76,14 @@ function About() {
             </p>
           </div>
 
+          {/* --- VERTICAL DIVIDER --- */}
           <div className="vertical-line"></div>
 
-          {/* RIGHT SIDE */}
+          {/* --- RIGHT SIDE --- */}
           <div className="about-column right-col">
             
             <h3>🔮 Skill Tree (Hover for Stats)</h3>
             <div className="skill-grid">
-              {/* MAPPING THROUGH SKILLS */}
               {skills.map((skill, index) => (
                 <div key={index} className="skill-item" data-tooltip={skill.stat}>
                   {skill.icon} {skill.name}
@@ -89,11 +93,12 @@ function About() {
 
             <hr className="mc-divider"/>
 
-            <h3>🎒 Inventory (Tools)</h3>
+            {/* --- UPDATED MINECRAFT INVENTORY --- */}
+            <h3>🎒 Inventory</h3>
             <ul className="interest-list">
               <li>⚔️ <strong>Diamond Sword:</strong> For crushing bugs (and noobs)</li>
               <li>👑 <strong>Gold Helmet:</strong> King James Fanboy Gear</li>
-              <li>🚩 <strong>Smirnoff papi:</strong> Emergency Mana Potion</li>
+              <li>🚫 <strong>Barrier Block:</strong> That one error I can't find</li>
             </ul>
 
             <hr className="mc-divider"/>
