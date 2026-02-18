@@ -67,15 +67,16 @@ function About() {
               <li>🏀 <strong>Basketball:</strong> LeBron James (The Goat)</li>
               <li>🎮 <strong>Gaming:</strong> Casual Grinding</li>
               <li>📸 <strong>Photography:</strong> Capturing Moments</li>
-              <li>🚗 <strong>Cars:</strong> Speed & Engineering</li>
+              <li>🚗 <strong>Cars:</strong> SUPRAAAAAAAAAAAAAAAAAAAA</li>
             </ul>
 
             <hr className="mc-divider"/>
 
             <h3>📜 Bio</h3>
             <p className="bio-text">
-              "I write code, break code, and then fix code. When I'm not debugging, 
-              I'm probably watching the Lakers or sleeping."
+              "I write code, break code, and then fix code. Always ready for some 
+              emergency hoop session. I only my bed and my mama and my girl 
+              and Lebron (2018 bron for the specifics)"
             </p>
           </div>
 
