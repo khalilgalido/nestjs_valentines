@@ -15,7 +15,7 @@ function Home() {
         {/* Replaced text h1 with the image */}
         <img src={titleImg} alt="KhalilCraft" className="mc-title-img" />
         
-        <p className="mc-subtitle">Rei Khalil S. Galido</p>
+       
 
         <div className="menu-grid">
           <Link to="/guestbook" className="mc-btn">Guestbook</Link>
