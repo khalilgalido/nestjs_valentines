@@ -17,9 +17,9 @@ function Home() {
   // --- CHARACTER STATE ---
   const [charIndex, setCharIndex] = useState(0);
   const characters = [
-    { img: char1, name: "Steve" },
-    { img: char2, name: "Alex" },
-    { img: char3, name: "Herobrine" }
+    { img: char1, name: "Viltrumite na Khalil" },
+    { img: char2, name: "Lil Weirdkid" },
+    { img: char3, name: "Khalil sa minecraft legit" }
   ];
 
   // --- GUESTBOOK STATE ---

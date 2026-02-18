@@ -167,10 +167,10 @@
 /* --- LEFT SIDE GUESTBOOK --- */
 .guestbook-sidebar {
   position: absolute;
-  left: 20px;        /* Moves it close to the left edge (was 5%) */
+  left: 15px;        /* Moves it close to the left edge (was 5%) */
   top: 35%;          /* Pushes it down to clear the Logo (was 15%) */
   bottom: 20%;       /* Makes it shorter from the bottom */
-  width: 250px;      
+  width: 270px;      
   background: rgba(0, 0, 0, 0.6); 
   border: 2px solid #555;
   padding: 10px;
