@@ -1,82 +1,162 @@
-/* --- ABOUT PAGE STYLES --- */
-
-.about-panel {
-  max-width: 800px; /* Wider panel for 2 columns */
-}
-
-.about-content {
-  display: flex;
-  gap: 30px;
-  align-items: flex-start;
-  text-align: left;
-}
-
-/* LEFT COLUMN (Avatar) */
-.avatar-section {
-  flex: 1;
+/* --- BOOK CONTAINER --- */
+.book-overlay {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: rgba(0,0,0,0.1);
-  padding: 10px;
-  border: 2px solid #777;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
 }
 
-.about-skin {
-  height: 200px;
-  image-rendering: pixelated;
-  margin-bottom: 10px;
+.book-container {
+  display: flex;
+  width: 90%;
+  max-width: 900px;
+  height: 600px; /* Fixed height for book look */
+  background-color: #f4e4bc; /* Paper Color */
+  border: 12px solid #5c3c1e; /* Leather Cover Border */
+  border-radius: 4px;
+  box-shadow: 10px 10px 20px rgba(0,0,0,0.5), inset 0 0 60px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
 }
 
-.gamertag {
-  background: #000;
-  color: #fff;
-  padding: 5px 10px;
+/* --- PAGES --- */
+.book-page {
+  flex: 1; /* Each page takes 50% width */
+  padding: 30px;
+  overflow-y: auto; /* Scroll if content is too long */
+  color: #3e2723; /* Dark Brown Text */
   font-family: 'VT323', monospace;
-  font-size: 1.5rem;
-  border: 2px solid #fff;
-}
-
-/* RIGHT COLUMN (Stats) */
-.stats-section {
-  flex: 2;
   font-size: 1.3rem;
 }
 
-.stats-section p {
-  margin: 5px 0;
+/* The Center Fold Line */
+.left-page {
+  border-right: 2px solid #d7c496;
+  box-shadow: inset -10px 0 20px rgba(0,0,0,0.05); /* Shadow near spine */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-.mc-divider {
+.right-page {
+  box-shadow: inset 10px 0 20px rgba(0,0,0,0.05); /* Shadow near spine */
+}
+
+/* --- HEADERS --- */
+.page-header {
+  text-align: center;
+  border-bottom: 2px solid #3e2723;
+  padding-bottom: 10px;
+  margin-top: 0;
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+  color: #5d4037;
+  text-decoration: underline;
+}
+
+/* --- LEFT PAGE ELEMENTS --- */
+.avatar-container {
+  background: rgba(0,0,0,0.05);
+  padding: 15px;
+  border: 2px dashed #8d6e63;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.book-skin {
+  height: 180px;
+  image-rendering: pixelated;
+}
+
+.book-name {
+  background: #222;
+  color: white;
+  padding: 2px 10px;
+  margin-top: 5px;
+  font-size: 1.5rem;
+  display: inline-block;
+}
+
+.stats-box {
+  width: 100%;
+  background: rgba(255,255,255,0.4);
+  padding: 10px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.bio-quote {
+  font-style: italic;
+  text-align: center;
+  font-size: 1.2rem;
+  background: #e8d5a5;
+  padding: 10px;
+  border: 1px solid #c7b284;
+}
+
+/* --- RIGHT PAGE ELEMENTS --- */
+.book-list {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.book-list li {
+  margin-bottom: 8px;
+  border-bottom: 1px dashed #d7c496;
+}
+
+.book-divider {
   border: 0;
-  border-top: 2px dashed #555;
+  border-top: 2px dashed #8d6e63;
   margin: 15px 0;
 }
 
-.interest-list {
-  list-style: none;
-  padding: 0;
+/* Skill Grid */
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.interest-list li {
-  margin-bottom: 8px;
+.skill-badge {
+  background: #5d4037;
+  color: #f4e4bc;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 1.1rem;
 }
 
-.bio-text {
-  font-style: italic;
-  color: #333;
-  background: #ddd;
-  padding: 10px;
-  border-left: 4px solid #777;
+/* Close Button */
+.close-btn {
+  margin-top: 20px;
+  background: #7d7d7d;
+  border: 4px solid white;
+  color: white;
+  padding: 10px 40px;
+  font-size: 1.5rem;
+  text-decoration: none;
+  text-transform: uppercase;
+  box-shadow: 4px 4px 0 #000;
+}
+.close-btn:hover {
+  background: #909090;
 }
 
-/* MOBILE FIX */
-@media (max-width: 600px) {
-  .about-content {
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .book-container {
     flex-direction: column;
-    align-items: center;
+    height: auto; /* Let it grow tall on phone */
   }
-  .stats-section {
-    width: 100%;
+  .left-page {
+    border-right: none;
+    border-bottom: 2px solid #d7c496;
   }
 }
