@@ -21,9 +21,9 @@ function Home() {
   });
 
   const characters = [
-    { img: char1, name: "Steve" },
-    { img: char2, name: "Alex" },
-    { img: char3, name: "Herobrine" }
+    { img: char1, name: "Viltrumite Lil" },
+    { img: char2, name: "lil Lil" },
+    { img: char3, name: "MC Lil" }
   ];
 
   // --- GUESTBOOK STATE ---

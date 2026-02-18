@@ -146,3 +146,47 @@
     height: 2px;
   }
 }
+
+.skill-item {
+  position: relative; /* Needed for tooltip positioning */
+  background: #8b8b8b;
+  border: 2px solid #373737;
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  cursor: help; /* Changes cursor to question mark */
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
+  transition: transform 0.1s;
+}
+
+.skill-item:hover {
+  background: #a0a0a0;
+  transform: scale(1.05); /* Slight pop up */
+  z-index: 100; /* Bring to front */
+}
+
+/* THE TOOLTIP (Hidden by default) */
+.skill-item::after {
+  content: attr(data-tooltip); /* Grabs the text from React */
+  position: absolute;
+  bottom: 110%; /* Shows above the item */
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Minecraft Tooltip Style */
+  background-color: #100010; /* Very dark purple/black */
+  color: #55ff55; /* Minecraft Green Text */
+  border: 2px solid #2e004f; /* Purple Border */
+  padding: 5px 10px;
+  font-size: 1rem;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
+}
+
+/* Show Tooltip on Hover */
+.skill-item:hover::after {
+  opacity: 1;
+}

@@ -1,43 +1,50 @@
-import { useState, useEffect } from 'react'; // Added Hooks
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import '../pagescss/About.css';
 
-// --- IMPORT SAME CHARACTERS ---
+// --- IMPORT CHARACTERS ---
 import char1 from '../assets/char1.png';
 import char2 from '../assets/char2.png';
 import char3 from '../assets/char3.png';
 
 function About() {
-  const [skin, setSkin] = useState(char1); // Default to first skin
+  const [skin, setSkin] = useState(char1);
   const [skinName, setSkinName] = useState("Steve");
 
-  // --- CHECK MEMORY ON LOAD ---
+  // --- SKILL DATA (Name + Funny Stat) ---
+  const skills = [
+    { name: "React.js", icon: "⚛️", stat: "UI Sorcery Lvl 50" },
+    { name: "NestJS", icon: "🦁", stat: "Backend Beast Mode" },
+    { name: "MySQL", icon: "🐬", stat: "Data Hoarding +100" },
+    { name: "Arduino", icon: "🤖", stat: "Hardware Hacking" },
+    { name: "CSS/Tailwind", icon: "🎨", stat: "Pixel Perfect Arts" },
+    { name: "Supabase", icon: "☁️", stat: "Instant DB Magic" }
+  ];
+
   useEffect(() => {
     const savedIndex = localStorage.getItem('selectedSkin');
     if (savedIndex) {
       const index = parseInt(savedIndex);
-      if (index === 0) { setSkin(char1); setSkinName("Khalil"); } // You can rename "Steve" to "Khalil" here if you want
+      if (index === 0) { setSkin(char1); setSkinName("Khalil"); }
       if (index === 1) { setSkin(char2); setSkinName("Alex"); }
       if (index === 2) { setSkin(char3); setSkinName("Herobrine"); }
     }
   }, []);
 
   return (
-    <div className="about-wrapper"> {/* New Wrapper for centering */}
+    <div className="about-wrapper">
       <div className="mc-panel about-panel">
         <h2 className="mc-title">Player Stats</h2>
         
         <div className="about-split-layout">
           
-          {/* --- LEFT SIDE --- */}
+          {/* LEFT SIDE */}
           <div className="about-column left-col">
             <div className="avatar-row">
               <div className="avatar-box">
-                {/* DYNAMIC SKIN IMAGE */}
                 <img src={skin} alt="Skin" className="about-skin" />
                 <div className="gamertag">{skinName}</div>
               </div>
-              
               <div className="stats-text">
                 <p><strong>Class:</strong> Lazy Developer 👨‍💻</p>
                 <p><strong>Level:</strong> IT Student (Lvl 20)</p>
@@ -64,28 +71,28 @@ function About() {
             </p>
           </div>
 
-          {/* --- VERTICAL DIVIDER --- */}
           <div className="vertical-line"></div>
 
-          {/* --- RIGHT SIDE --- */}
+          {/* RIGHT SIDE */}
           <div className="about-column right-col">
-            <h3>🔮 Skill Tree (Tech Stack)</h3>
+            
+            <h3>🔮 Skill Tree (Hover for Stats)</h3>
             <div className="skill-grid">
-              <div className="skill-item">⚛️ React.js</div>
-              <div className="skill-item">🦁 NestJS</div>
-              <div className="skill-item">🐬 MySQL</div>
-              <div className="skill-item">🤖 Arduino</div>
-              <div className="skill-item">🎨 CSS/Tailwind</div>
-              <div className="skill-item">☁️ Supabase</div>
+              {/* MAPPING THROUGH SKILLS */}
+              {skills.map((skill, index) => (
+                <div key={index} className="skill-item" data-tooltip={skill.stat}>
+                  {skill.icon} {skill.name}
+                </div>
+              ))}
             </div>
 
             <hr className="mc-divider"/>
 
             <h3>🎒 Inventory (Tools)</h3>
             <ul className="interest-list">
-              <li>💻 <strong>Laptop:</strong> VS Code Main</li>
-              <li>🎧 <strong>Headset:</strong> Noise Cancelling</li>
-              <li>☕ <strong>Fuel:</strong> Iced Coffee</li>
+              <li>⚔️ <strong>Diamond Sword:</strong> For crushing bugs (and noobs)</li>
+              <li>👑 <strong>Gold Helmet:</strong> King James Fanboy Gear</li>
+              <li>🚩 <strong>Smirnoff papi:</strong> Emergency Mana Potion</li>
             </ul>
 
             <hr className="mc-divider"/>
@@ -101,8 +108,7 @@ function About() {
           </div>
 
         </div>
-
-        <Link to="/" className="back-link">Return Menu</Link>
+        <Link to="/" className="back-link">Close GUI</Link>
       </div>
     </div>
   );
