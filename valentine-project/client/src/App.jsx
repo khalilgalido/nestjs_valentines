@@ -3,7 +3,6 @@ import './App.css'; // Global Styles
 
 // Pages
 import Home from './pages/Home';
-import Guestbook from './pages/Guestbook';
 import Gallery from './pages/Gallery';
 import About from './pages/About';
 import Portfolio from './pages/Portfolio';
