@@ -90,7 +90,8 @@ function About() {
                 <div 
                   key={index} 
                   className="skill-item" 
-                  onClick={() => setSelectedSkill(skill)} // <--- CLICK TO OPEN MODAL
+                  onClick={() => setSelectedSkill(skill)}
+                  data-tooltip={skill.desc} // <--- CLICK TO OPEN MODAL
                 >
                   {skill.icon} {skill.name}
                 </div>

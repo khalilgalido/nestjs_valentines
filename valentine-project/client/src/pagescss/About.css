@@ -5,14 +5,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 20px; /* Prevents touching edges on small screens */
+  padding: 20px;
 }
 
 /* --- The Main Panel --- */
 .about-panel {
   max-width: 1100px !important;
   width: 100%;
-  /* Remove top margin since Flexbox handles centering now */
   margin: 0 auto; 
 }
 
@@ -51,10 +50,9 @@
   text-align: center;
 }
 
-/* Updated to fit your custom images */
 .about-skin {
   height: 150px;
-  width: auto; /* Keeps aspect ratio */
+  width: auto;
   image-rendering: pixelated;
   display: block;
   object-fit: contain;
@@ -104,15 +102,6 @@
   gap: 10px;
 }
 
-.skill-item {
-  background: #a0a0a0;
-  border: 2px solid #555;
-  padding: 8px;
-  text-align: center;
-  font-weight: bold;
-  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
-}
-
 .music-box {
   background: #333;
   color: #55ff55;
@@ -135,63 +124,53 @@
   background: #55ff55;
 }
 
-/* --- MOBILE RESPONSIVENESS --- */
-@media (max-width: 850px) {
-  .about-split-layout {
-    flex-direction: column;
-  }
-  .vertical-line {
-    display: none;
-    width: 100%;
-    height: 2px;
-  }
-}
-
+/* --- SKILL ITEM STYLES --- */
 .skill-item {
-  position: relative; /* Needed for tooltip positioning */
+  position: relative; /* Essential for tooltip */
   background: #8b8b8b;
   border: 2px solid #373737;
   padding: 10px;
   text-align: center;
   font-weight: bold;
-  cursor: help; /* Changes cursor to question mark */
+  cursor: pointer; /* Indicates clickable */
   box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
   transition: transform 0.1s;
 }
 
 .skill-item:hover {
   background: #a0a0a0;
-  transform: scale(1.05); /* Slight pop up */
-  z-index: 100; /* Bring to front */
+  transform: scale(1.05);
+  z-index: 100; /* Brings it to top so tooltip isn't hidden */
 }
 
-/* THE TOOLTIP (Hidden by default) */
+/* --- THE PURPLE SNEAK PEEK TOOLTIP --- */
 .skill-item::after {
-  content: attr(data-tooltip); /* Grabs the text from React */
+  content: attr(data-tooltip); /* Grabs text from React */
   position: absolute;
-  bottom: 110%; /* Shows above the item */
+  bottom: 115%; /* Pushes it above the button */
   left: 50%;
   transform: translateX(-50%);
   
-  /* Minecraft Tooltip Style */
-  background-color: #100010; /* Very dark purple/black */
-  color: #55ff55; /* Minecraft Green Text */
-  border: 2px solid #2e004f; /* Purple Border */
-  padding: 5px 10px;
+  /* Minecraft Tooltip Look */
+  background-color: #100010;
+  color: #55ff55;
+  border: 2px solid #2e004f;
+  
+  padding: 6px 10px;
   font-size: 1rem;
+  font-weight: normal;
   white-space: nowrap;
-  pointer-events: none;
+  pointer-events: none; /* Ignore clicks so you can click the button underneath */
+  
   opacity: 0;
   transition: opacity 0.2s;
   box-shadow: 4px 4px 10px rgba(0,0,0,0.5);
 }
 
-/* Show Tooltip on Hover */
+/* Show on Hover */
 .skill-item:hover::after {
   opacity: 1;
 }
-
-/* ... Keep all existing CSS ... */
 
 /* --- MODAL OVERLAY --- */
 .modal-overlay {
@@ -200,7 +179,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.7); /* Dark background */
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -208,7 +187,7 @@
   backdrop-filter: blur(2px);
 }
 
-/* --- MODAL BOX (GUI STYLE) --- */
+/* --- MODAL BOX --- */
 .modal-content {
   background: #c6c6c6;
   border: 4px solid #000;
@@ -238,7 +217,7 @@
   margin-bottom: 20px;
 }
 
-/* --- MINECRAFT XP BAR --- */
+/* --- XP BAR --- */
 .xp-bar-container {
   width: 100%;
   height: 25px;
@@ -253,7 +232,7 @@
 
 .xp-bar-fill {
   height: 100%;
-  background: linear-gradient(to right, #00aa00, #55ff55); /* Minecraft Green */
+  background: linear-gradient(to right, #00aa00, #55ff55);
   box-shadow: inset 0 -2px 0 rgba(0,0,0,0.5);
   transition: width 0.5s ease-out;
 }
@@ -269,7 +248,14 @@
   line-height: 20px;
 }
 
-/* Update Skill Item Cursor */
-.skill-item {
-  cursor: pointer; /* Change to pointer so they know it's clickable */
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 850px) {
+  .about-split-layout {
+    flex-direction: column;
+  }
+  .vertical-line {
+    display: none;
+    width: 100%;
+    height: 2px;
+  }
 }
