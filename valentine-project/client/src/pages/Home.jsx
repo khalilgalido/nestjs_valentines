@@ -8,7 +8,7 @@ import '../pagescss/Home.css';
 import char1 from '../assets/char1.png';
 import char2 from '../assets/char2.png';
 import char3 from '../assets/char3.png';
-import hangerIcon from '../assets/hanger.jpg';
+import hangerIcon from '../assets/hanger.png';
 
 function Home() {
   // State to track which character is currently showing
