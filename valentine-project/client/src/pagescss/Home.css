@@ -164,13 +164,23 @@
   color: white;
 }
 
-.guestbook-sidebar h3 {
-  margin-top: 0;
-  text-align: center;
-  border-bottom: 2px solid #777;
-  padding-bottom: 5px;
-  color: #ffff55;
-  text-shadow: 2px 2px 0 #000;
+/* --- LEFT SIDE GUESTBOOK --- */
+.guestbook-sidebar {
+  position: absolute;
+  left: 20px;        /* Moves it close to the left edge (was 5%) */
+  top: 35%;          /* Pushes it down to clear the Logo (was 15%) */
+  bottom: 20%;       /* Makes it shorter from the bottom */
+  width: 250px;      
+  background: rgba(0, 0, 0, 0.6); 
+  border: 2px solid #555;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  z-index: 10;
+  color: white;
+  
+  /* Optional: Round corners slightly for a cleaner look */
+  border-radius: 4px;
 }
 
 /* The scrollable chat area */
