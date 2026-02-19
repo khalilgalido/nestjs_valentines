@@ -13,7 +13,7 @@ import fam2 from '../assets/fam2.jpg';
 import fam3 from '../assets/fam3.jpg';
 
 import boys1 from '../assets/bois3.jpeg';
-import boys2 from '../assets/bois2.jfif';
+import boys2 from '../assets/bois2.jpg';
 import boys3 from '../assets/bois4.jpeg';
 
 import gf1 from '../assets/gf1.jfif';
