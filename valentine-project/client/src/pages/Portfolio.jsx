@@ -15,7 +15,7 @@ import logoAPC from '../assets/logo_apc.png';
 import projAnimal from '../assets/proj_animal.jpg';
 import projLib from '../assets/proj_lib.jpg';
 import projArduino from '../assets/proj_arduino.png';
-import projWeb from '../assets/proj_web.jpg';
+import projWeb from '../assets/proj_web.png';
 
 import wireGaming from '../assets/wire_gaming.JPG';
 import wireCV from '../assets/wire_cv.JPG';
