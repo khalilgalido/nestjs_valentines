@@ -125,56 +125,53 @@
 /* ... (Rest of CSS for logos, badges, carousel remains the same) ... */
 
 /* --- THE CARD --- */
-.school-card {
-  background: #c6c6c6;
-  border: 3px solid #555;
-  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 4px 4px 0 rgba(0,0,0,0.3);
-  width: 220px;
-  text-align: center;
-  padding: 15px 10px;
+/* --- FIX 1: LOCK THE LOGO BOX SIZE --- */
+.school-logo-box {
+  width: 80px;
+  height: 80px;
+  min-width: 80px; /* Forces it to NEVER grow */
+  min-height: 80px; /* Forces it to NEVER grow */
+  background: #fff;
+  border: 2px solid #333;
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 3;
-  cursor: pointer;
-  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
 }
 
-/* --- THE HIGHLIGHT/HOVER EFFECT --- */
-.timeline-node.is-active .school-card {
-  transform: translateY(-5px); /* Pops up slightly */
-  border-color: #55ff55; /* Glows Minecraft Green */
-  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 0 0 15px rgba(85, 255, 85, 0.6);
+/* --- FIX 2: FORCE THE IMAGE TO FIT --- */
+.school-logo {
+  width: 70px !important; /* Hard limit */
+  height: 70px !important; /* Hard limit */
+  object-fit: contain;
 }
 
-.timeline-node.is-active::after {
-  background: #fff; /* The dot turns white when highlighted */
-  border-color: #55ff55;
-}
-
-/* --- THE CHARACTER "CURSOR" ON THE JOURNEY --- */
+/* --- FIX 3: CENTER THE CHARACTER --- */
 .timeline-player {
   position: absolute;
-  top: -100px; /* Stand ON TOP of the school card */
-  height: 90px;
+  top: -85px; /* Adjust height to stand on the card */
+  left: 50%; /* Center horizontally */
+  height: 80px;
   width: auto;
   image-rendering: pixelated;
-  z-index: 10;
+  z-index: 100; /* Ensure it stays on top of everything */
+  pointer-events: none;
   filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));
+  
+  /* We have to include the -50% X translation in the animation to keep it centered */
   animation: teleportIn 0.2s ease-out forwards, idleBounce 1.5s infinite ease-in-out alternate 0.2s;
-  pointer-events: none; /* Prevents the character from blocking mouse clicks! */
 }
 
-/* Cool teleport "pop-in" animation when jumping between cards */
+/* Fixed animations to keep the character centered */
 @keyframes teleportIn {
-  0% { transform: scale(0.5) translateY(-20px); opacity: 0; }
-  100% { transform: scale(1) translateY(0); opacity: 1; }
+  0% { transform: translate(-50%, -20px) scale(0.5); opacity: 0; }
+  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
 }
 
 @keyframes idleBounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
+  from { transform: translate(-50%, 0); }
+  to { transform: translate(-50%, -8px); }
 }
 
 .mc-badge {
