@@ -20,7 +20,7 @@ function ResourcesPopup() {
             <div className="resources-list">
               <div className="resource-item">
                 <h4>⚛️ Core Tech Stack</h4>
-                <p>React.js, NestJS, MongoDB, MySQL, and Custom CSS.</p>
+                <p>React.js, NestJS, Supabase, and Custom CSS.</p>
               </div>
               
               <div className="resource-item">
