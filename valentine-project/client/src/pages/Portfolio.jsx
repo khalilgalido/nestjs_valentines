@@ -24,52 +24,50 @@ function Portfolio() {
   const [skin, setSkin] = useState(char1);
   const [currentProjectIndex, setCurrentProjectIndex] = useState(0);
   const [selectedImg, setSelectedImg] = useState(null);
+  
+  // NEW: State for clicking a school
+  const [selectedSchool, setSelectedSchool] = useState(null);
 
-  // --- EDUCATION JOURNEY DATA ---
+  // --- EDUCATION JOURNEY DATA (Added Descriptions) ---
   const education = [
-    { id: 1, level: "Junior High", school: "Thy Covenant", logo: logoTC },
-    { id: 2, level: "Senior High", school: "Don Bosco Tech. Inst. Makati", logo: logoDB },
-    { id: 3, level: "2nd Year College", school: "Asia Pacific College", logo: logoAPC }
-  ];
-
-  // Hover state for the timeline (Defaults to the last index: 2)
-  const [activeNode, setActiveNode] = useState(education.length - 1);
-
-  // --- PROJECT CAROUSEL DATA ---
-  const projects = [
-    {
-      title: "AnimalPalsCenter",
-      tech: "OutSystems",
-      desc: "A centralized platform to manage pet adoptions and care using low-code tools.",
-      image: projAnimal
+    { 
+      id: 1, 
+      level: "Junior High", 
+      school: "Thy Covenant", 
+      logo: logoTC,
+      desc: "Began the main questline here. Built my foundational skills, basic logic, and survived the early-game mob spawns."
     },
-    {
-      title: "Library Management System",
-      tech: "PHP | MongoDB | MySQL",
-      desc: "A hybrid database system for managing books, users, and borrowing logs efficiently.",
-      image: projLib
+    { 
+      id: 2, 
+      level: "Senior High", 
+      school: "Don Bosco Tech. Inst. Makati", 
+      logo: logoDB,
+      desc: "Tech-Voc / STEM Track. Upgraded my toolset, started learning real coding mechanics, and survived the technical tutorials."
     },
-    {
-      title: "Arduino Hydro Fold",
-      tech: "Arduino | Sensors",
-      desc: "An automated clothesline equipped with a rain sensor that folds itself when it detects rain.",
-      image: projArduino
-    },
-    {
-      title: "Minecraft Personal Website",
-      tech: "React | CSS",
-      desc: "A fully custom interactive portfolio styled like a classic block-building game inventory.",
-      image: projWeb
+    { 
+      id: 3, 
+      level: "2nd Year College", 
+      school: "Asia Pacific College", 
+      logo: logoAPC,
+      desc: "Current Respawn Point. Grinding XP in programming, databases, UI/UX, and system architecture. (Leveling up to Full Stack)."
     }
   ];
 
-  // --- WIREFRAME DATA ---
+  const [activeNode, setActiveNode] = useState(education.length - 1);
+
+  // --- PROJECT DATA ---
+  const projects = [
+    { title: "AnimalPalsCenter", tech: "OutSystems", desc: "A centralized platform to manage pet adoptions and care.", image: projAnimal },
+    { title: "Library Management System", tech: "PHP | MongoDB | MySQL", desc: "A hybrid database system for managing books and users.", image: projLib },
+    { title: "Arduino Hydro Fold", tech: "Arduino | Sensors", desc: "Automated clothesline that folds itself when it detects rain.", image: projArduino },
+    { title: "Minecraft Personal Website", tech: "React | CSS", desc: "A fully custom interactive portfolio styled like Minecraft.", image: projWeb }
+  ];
+
   const wireframes = [
     { title: "Gaming E-Commerce", image: wireGaming },
     { title: "CV Wireframe", image: wireCV }
   ];
 
-  // Load the player's character choice
   useEffect(() => {
     const savedIndex = localStorage.getItem('selectedSkin');
     if (savedIndex) {
@@ -80,13 +78,8 @@ function Portfolio() {
     }
   }, []);
 
-  // Carousel Controls
-  const nextProject = () => {
-    setCurrentProjectIndex((prev) => (prev + 1) % projects.length);
-  };
-  const prevProject = () => {
-    setCurrentProjectIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-  };
+  const nextProject = () => setCurrentProjectIndex((prev) => (prev + 1) % projects.length);
+  const prevProject = () => setCurrentProjectIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
 
   return (
     <div className="portfolio-wrapper">
@@ -97,20 +90,15 @@ function Portfolio() {
         <h3 className="section-header">🗺️ The Journey (Education)</h3>
         
         <div className="timeline-container">
-          {/* Track resets back to Current School (last index) when mouse leaves the track */}
           <div className="timeline-track" onMouseLeave={() => setActiveNode(education.length - 1)}>
             {education.map((edu, index) => (
               <div 
                 key={edu.id} 
                 className={`timeline-node ${activeNode === index ? 'is-active' : ''}`}
                 onMouseEnter={() => setActiveNode(index)}
+                onClick={() => setSelectedSchool(edu)} // Trigger Popup on Click
               >
                 
-                {/* Character only shows up on the currently hovered/active node */}
-                {activeNode === index && (
-                  <img src={skin} alt="Player Cursor" className="timeline-player" />
-                )}
-
                 <div className="school-card">
                   <div className="school-logo-box">
                     <img src={edu.logo} alt="School Logo" className="school-logo" />
@@ -119,7 +107,13 @@ function Portfolio() {
                     <h4>{edu.school}</h4>
                     <span className="mc-badge">{edu.level}</span>
                   </div>
+                  <div className="click-hint">Click for stats ⮞</div>
                 </div>
+
+                {/* Character placed BELOW the card, ON the track */}
+                {activeNode === index && (
+                  <img src={skin} alt="Player Cursor" className="timeline-player" />
+                )}
               </div>
             ))}
           </div>
@@ -129,9 +123,9 @@ function Portfolio() {
 
         {/* --- SECTION 2: PROJECTS CAROUSEL --- */}
         <h3 className="section-header">🛠️ Crafted Systems (Projects)</h3>
+        {/* ... (Carousel Code Remains Exactly the Same) ... */}
         <div className="carousel-wrapper">
           <button className="mc-btn-small carousel-btn" onClick={prevProject}>◄</button>
-          
           <div className="carousel-view">
             <div className="carousel-card">
               <div className="carousel-img-box" onClick={() => setSelectedImg(projects[currentProjectIndex].image)}>
@@ -144,13 +138,7 @@ function Portfolio() {
                 <p className="proj-desc">{projects[currentProjectIndex].desc}</p>
               </div>
             </div>
-            <div className="carousel-dots">
-              {projects.map((_, idx) => (
-                <span key={idx} className={`dot ${idx === currentProjectIndex ? 'active' : ''}`}></span>
-              ))}
-            </div>
           </div>
-
           <button className="mc-btn-small carousel-btn" onClick={nextProject}>►</button>
         </div>
 
@@ -171,6 +159,29 @@ function Portfolio() {
 
         <Link to="/" className="back-link">Return Menu</Link>
       </div>
+
+      {/* --- SCHOOL DETAILS MODAL --- */}
+      {selectedSchool && (
+        <div className="modal-overlay" onClick={() => setSelectedSchool(null)}>
+          <div className="modal-content project-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="school-logo-box center-logo">
+              <img src={selectedSchool.logo} alt="School" className="school-logo" />
+            </div>
+            <h3 className="modal-title text-center">{selectedSchool.school}</h3>
+            
+            <div className="modal-body text-center">
+              <span className="mc-badge mb-15">{selectedSchool.level}</span>
+              <div className="project-desc-box text-left">
+                <p>{selectedSchool.desc}</p>
+              </div>
+            </div>
+
+            <div className="text-center mt-10">
+              <button className="mc-btn-small" onClick={() => setSelectedSchool(null)}>Close UI</button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* --- IMAGE LIGHTBOX --- */}
       {selectedImg && (

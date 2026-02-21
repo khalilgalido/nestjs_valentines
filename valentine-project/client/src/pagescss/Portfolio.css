@@ -33,39 +33,37 @@
 ========================================= */
 .timeline-container {
   width: 100%;
-  overflow-x: auto; /* Allows horizontal scrolling if items overflow */
-  padding: 30px 0 50px 0; /* Extra padding top for character, bottom for track */
+  overflow-x: auto; 
+  padding: 20px 0 80px 0; /* Huge bottom padding to fit the character */
+  display: flex;
+  justify-content: center; /* JUSTIFY TO MIDDLE */
   
-  /* Custom Scrollbar styling for Chrome/Safari/Edge */
+  /* Custom Scrollbar styling */
   scrollbar-width: thin;
   scrollbar-color: #8b8b8b #3a3a3a;
 }
 
-.timeline-container::-webkit-scrollbar {
-  height: 12px;
-}
-.timeline-container::-webkit-scrollbar-track {
-  background: #3a3a3a; /* Dark track */
-  border: 2px solid #fff;
-}
-.timeline-container::-webkit-scrollbar-thumb {
-  background: #8b8b8b; /* Minecraft gray button color */
-  border: 2px solid #373737;
-}
+.timeline-container::-webkit-scrollbar { height: 12px; }
+.timeline-container::-webkit-scrollbar-track { background: #3a3a3a; border: 2px solid #fff; }
+.timeline-container::-webkit-scrollbar-thumb { background: #8b8b8b; border: 2px solid #373737; }
 
+/* The "Grass Block" Path */
 .timeline-track {
   display: flex;
-  align-items: flex-end; /* Align items to the path line */
-  gap: 60px; /* Space between education points */
+  align-items: flex-end;
+  gap: 50px; 
   
-  /* The "Dirt Path" line */
-  border-bottom: 8px solid #5c3c1e; 
-  padding-bottom: 30px;
+  /* Grass top, Dirt bottom design */
+  background: #5c3c1e;
+  border-top: 6px solid #55ff55;
+  border-bottom: 8px solid #3e2723;
+  border-radius: 4px;
+  
+  padding: 10px 40px 30px 40px;
   position: relative;
-  
-  /* Ensures it doesn't squish on small screens, forcing scroll */
   min-width: max-content; 
-  margin: 0 auto; /* Centers the track if it's smaller than screen */
+  margin: 0 auto; 
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .timeline-node {
@@ -75,21 +73,28 @@
   align-items: center;
 }
 
-/* The Green Dot on the path */
+/* --- THE DOT (Empty by default) --- */
 .timeline-node::after {
   content: '';
   position: absolute;
-  bottom: -38px; /* Positions it exactly on the dirt line */
-  width: 24px;
-  height: 24px;
-  background: #55ff55; /* Minecraft XP Green */
-  border: 4px solid #000;
-  image-rendering: pixelated;
-  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.5);
+  bottom: -40px; /* Moves down onto the grass/dirt track */
+  width: 22px;
+  height: 22px;
+  background: #222; /* Dark empty hole */
+  border: 4px solid #444; /* Dark border */
+  border-radius: 50%;
   z-index: 2;
+  transition: all 0.2s ease;
 }
 
-/* The School Information Card placed above the dot */
+/* Highlighted Dot when Hovered */
+.timeline-node.is-active::after {
+  background: #55ff55; /* Fills with green */
+  border-color: #fff;
+  box-shadow: 0 0 15px #55ff55;
+}
+
+/* --- THE CARD --- */
 .school-card {
   background: #c6c6c6;
   border: 3px solid #555;
@@ -102,35 +107,55 @@
   align-items: center;
   position: relative;
   z-index: 3;
+  cursor: pointer;
+  margin-bottom: 25px; /* Pushes card UP to leave room for the character below */
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* --- THE CHARACTER ON THE JOURNEY --- */
+.timeline-node.is-active .school-card {
+  transform: translateY(-5px); 
+  border-color: #55ff55; 
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 0 0 15px rgba(85, 255, 85, 0.4);
+}
+
+.click-hint {
+  font-size: 0.8rem;
+  color: #555;
+  margin-top: 10px;
+  font-style: italic;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.timeline-node.is-active .click-hint {
+  opacity: 1;
+}
+
+/* --- THE CHARACTER "CURSOR" (Inside the green thingy area) --- */
 .timeline-player {
   position: absolute;
-  top: -100px; /* Stand ON TOP of the school card */
-  height: 90px;
+  bottom: -45px; /* Places character exactly on the highlighted dot */
+  left: 50%;
+  height: 70px;
   width: auto;
   image-rendering: pixelated;
-  z-index: 10;
+  z-index: 100;
+  pointer-events: none;
   filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));
-  /* Add a little idle breathing animation */
-  animation: idleBounce 1.5s infinite ease-in-out alternate;
+  animation: teleportIn 0.2s ease-out forwards;
 }
 
-@keyframes idleBounce {
-  from { transform: translateY(0); }
-  to { transform: translateY(-8px); }
+@keyframes teleportIn {
+  0% { transform: translate(-50%, 15px) scale(0.5); opacity: 0; }
+  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
 }
 
-/* ... (Rest of CSS for logos, badges, carousel remains the same) ... */
-
-/* --- THE CARD --- */
-/* --- FIX 1: LOCK THE LOGO BOX SIZE --- */
+/* --- LOGO FIXES --- */
 .school-logo-box {
   width: 80px;
   height: 80px;
-  min-width: 80px; /* Forces it to NEVER grow */
-  min-height: 80px; /* Forces it to NEVER grow */
+  min-width: 80px;
+  min-height: 80px;
   background: #fff;
   border: 2px solid #333;
   margin-bottom: 10px;
@@ -140,38 +165,20 @@
   overflow: hidden;
 }
 
-/* --- FIX 2: FORCE THE IMAGE TO FIT --- */
 .school-logo {
-  width: 70px !important; /* Hard limit */
-  height: 70px !important; /* Hard limit */
+  width: 70px !important; 
+  height: 70px !important; 
   object-fit: contain;
 }
 
-/* --- FIX 3: CENTER THE CHARACTER --- */
-.timeline-player {
-  position: absolute;
-  top: -85px; /* Adjust height to stand on the card */
-  left: 50%; /* Center horizontally */
-  height: 80px;
-  width: auto;
-  image-rendering: pixelated;
-  z-index: 100; /* Ensure it stays on top of everything */
-  pointer-events: none;
-  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));
-  
-  /* We have to include the -50% X translation in the animation to keep it centered */
-  animation: teleportIn 0.2s ease-out forwards, idleBounce 1.5s infinite ease-in-out alternate 0.2s;
-}
-
-/* Fixed animations to keep the character centered */
-@keyframes teleportIn {
-  0% { transform: translate(-50%, -20px) scale(0.5); opacity: 0; }
-  100% { transform: translate(-50%, 0) scale(1); opacity: 1; }
-}
-
-@keyframes idleBounce {
-  from { transform: translate(-50%, 0); }
-  to { transform: translate(-50%, -8px); }
+.school-info h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+  color: #111;
+  min-height: 40px; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .mc-badge {
@@ -183,6 +190,15 @@
   border: 2px solid #333;
   box-shadow: inset 1px 1px 0 #555;
 }
+
+/* --- UTILS FOR MODAL --- */
+.center-logo {
+  margin: 0 auto 15px auto;
+}
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.mb-15 { margin-bottom: 15px; display: inline-block; }
+.mt-10 { margin-top: 10px; }
 
 
 /* --- PROJECT CAROUSEL --- */
@@ -295,7 +311,6 @@
   background: #55ff55;
 }
 
-
 /* --- WIREFRAMES --- */
 .wireframe-grid {
   display: grid;
@@ -356,10 +371,6 @@
   border: 4px solid #fff;
 }
 
-.mt-10 {
-  margin-top: 15px;
-}
-
 /* --- RESPONSIVENESS --- */
 @media (max-width: 768px) {
   .carousel-wrapper {
@@ -374,7 +385,9 @@
   .wireframe-grid {
     grid-template-columns: 1fr;
   }
-  /* Ensure timeline scrolls on mobile */
+  .timeline-container {
+    justify-content: flex-start; /* Switch back to scroll behavior on mobile */
+  }
   .timeline-track {
     padding-left: 20px;
     padding-right: 20px;
