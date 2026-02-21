@@ -6,9 +6,9 @@ function ResourcesPopup() {
 
   return (
     <>
-      {/* The Floating 'Recipe Book' Button */}
-      <button className="mc-floating-btn" onClick={() => setIsOpen(true)} title="View Resources">
-        📘
+      {/* The Floating Text Button */}
+      <button className="mc-floating-btn" onClick={() => setIsOpen(true)} title="Resources">
+        Resources
       </button>
 
       {/* The Popup Modal */}

@@ -3,24 +3,27 @@
   position: fixed;
   bottom: 30px;
   right: 30px;
-  width: 65px;
-  height: 65px;
+  width: auto;             /* Let the text dictate the width */
+  height: auto;            
+  padding: 12px 24px;      /* Adds nice spacing around the word */
   background: #8b8b8b;
+  color: #fff;             /* White text */
+  font-family: monospace;  /* Minecraft font */
+  font-weight: bold;
   border: 4px solid #373737;
   box-shadow: inset 4px 4px 0 #fff, inset -4px -4px 0 #555, 4px 4px 0 rgba(0,0,0,0.5);
-  font-size: 2.5rem;
+  font-size: 1.2rem;       /* Normal text size */
   cursor: pointer;
-  z-index: 9999; /* Forces it to stay on top of EVERYTHING */
+  z-index: 9999; 
   display: flex;
   justify-content: center;
   align-items: center;
   transition: transform 0.1s ease;
-  padding-bottom: 5px; /* Centers the emoji visually */
 }
 
 .mc-floating-btn:hover {
   background: #a0a0a0;
-  transform: scale(1.1);
+  transform: scale(1.05); /* Slight pop on hover */
 }
 
 .mc-floating-btn:active {
@@ -51,7 +54,7 @@
 
 .resource-item h4 {
   margin: 0 0 5px 0;
-  color: #55ff55; /* Minecraft Green */
+  color: #55ff55; 
   font-size: 1.2rem;
   text-shadow: 1px 1px 0 #000;
 }
@@ -74,7 +77,7 @@
 }
 
 .mc-link:hover {
-  color: #ffff55; /* Minecraft Gold on hover */
+  color: #ffff55; 
   border-bottom: 1px solid #ffff55;
 }
 
@@ -84,13 +87,12 @@
   width: 100%;
 }
 
-/* Make it slightly smaller on mobile so it doesn't block content */
+/* Make it slightly smaller on mobile */
 @media (max-width: 768px) {
   .mc-floating-btn {
     bottom: 20px;
     right: 20px;
-    width: 50px;
-    height: 50px;
-    font-size: 1.8rem;
+    padding: 10px 16px;
+    font-size: 1rem;
   }
 }
