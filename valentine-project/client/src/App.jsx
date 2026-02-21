@@ -9,7 +9,8 @@ import Socials from './pages/Socials';
 
 // --- IMPORT YOUR NEW POPUP HERE ---
 // (Make sure the path matches where you saved the file!)
-import ResourcesPopup from './src/ResourcesPopup'; 
+import ResourcesPopup from '<div className="" />
+<components></components>/ResourcesPopup'; 
 
 function App() {
   return (
