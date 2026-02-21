@@ -1,3 +1,129 @@
+/* --- WRAPPER & PANEL --- */
+.portfolio-wrapper {
+  min-height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+.portfolio-panel {
+  max-width: 1000px !important;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.section-header {
+  color: #222;
+  margin-top: 20px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+}
+
+.mc-divider {
+  border: 0;
+  border-top: 2px dashed #777;
+  border-bottom: 1px solid #fff;
+  margin: 30px 0;
+}
+
+/* =========================================
+   NEW: HORIZONTAL TIMELINE (THE JOURNEY)
+========================================= */
+.timeline-container {
+  width: 100%;
+  overflow-x: auto; /* Allows horizontal scrolling if items overflow */
+  padding: 30px 0 50px 0; /* Extra padding top for character, bottom for track */
+  
+  /* Custom Scrollbar styling for Chrome/Safari/Edge */
+  scrollbar-width: thin;
+  scrollbar-color: #8b8b8b #3a3a3a;
+}
+
+.timeline-container::-webkit-scrollbar {
+  height: 12px;
+}
+.timeline-container::-webkit-scrollbar-track {
+  background: #3a3a3a; /* Dark track */
+  border: 2px solid #fff;
+}
+.timeline-container::-webkit-scrollbar-thumb {
+  background: #8b8b8b; /* Minecraft gray button color */
+  border: 2px solid #373737;
+}
+
+.timeline-track {
+  display: flex;
+  align-items: flex-end; /* Align items to the path line */
+  gap: 60px; /* Space between education points */
+  
+  /* The "Dirt Path" line */
+  border-bottom: 8px solid #5c3c1e; 
+  padding-bottom: 30px;
+  position: relative;
+  
+  /* Ensures it doesn't squish on small screens, forcing scroll */
+  min-width: max-content; 
+  margin: 0 auto; /* Centers the track if it's smaller than screen */
+}
+
+.timeline-node {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* The Green Dot on the path */
+.timeline-node::after {
+  content: '';
+  position: absolute;
+  bottom: -38px; /* Positions it exactly on the dirt line */
+  width: 24px;
+  height: 24px;
+  background: #55ff55; /* Minecraft XP Green */
+  border: 4px solid #000;
+  image-rendering: pixelated;
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,0.5);
+  z-index: 2;
+}
+
+/* The School Information Card placed above the dot */
+.school-card {
+  background: #c6c6c6;
+  border: 3px solid #555;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #777, 4px 4px 0 rgba(0,0,0,0.3);
+  width: 220px;
+  text-align: center;
+  padding: 15px 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  z-index: 3;
+}
+
+/* --- THE CHARACTER ON THE JOURNEY --- */
+.timeline-player {
+  position: absolute;
+  top: -100px; /* Stand ON TOP of the school card */
+  height: 90px;
+  width: auto;
+  image-rendering: pixelated;
+  z-index: 10;
+  filter: drop-shadow(4px 4px 0 rgba(0,0,0,0.5));
+  /* Add a little idle breathing animation */
+  animation: idleBounce 1.5s infinite ease-in-out alternate;
+}
+
+@keyframes idleBounce {
+  from { transform: translateY(0); }
+  to { transform: translateY(-8px); }
+}
+
+/* ... (Rest of CSS for logos, badges, carousel remains the same) ... */
+
 /* --- THE CARD --- */
 .school-card {
   background: #c6c6c6;
@@ -49,4 +175,211 @@
 @keyframes idleBounce {
   from { transform: translateY(0); }
   to { transform: translateY(-8px); }
+}
+
+.mc-badge {
+  background: #111;
+  color: #55ff55;
+  padding: 4px 10px;
+  font-size: 0.9rem;
+  font-family: monospace;
+  border: 2px solid #333;
+  box-shadow: inset 1px 1px 0 #555;
+}
+
+
+/* --- PROJECT CAROUSEL --- */
+.carousel-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  background: #8b8b8b;
+  border: 4px solid #373737;
+  padding: 15px;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
+}
+
+.carousel-btn {
+  font-size: 1.5rem;
+  padding: 10px 15px;
+  height: 100%;
+}
+
+.carousel-view {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+}
+
+.carousel-card {
+  width: 100%;
+  background: #c6c6c6;
+  border: 2px solid #555;
+  display: flex;
+  flex-direction: column;
+}
+
+.carousel-img-box {
+  width: 100%;
+  height: 300px;
+  background: #111;
+  border-bottom: 2px solid #555;
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.carousel-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.2s;
+}
+
+.carousel-img-box:hover .carousel-img {
+  opacity: 0.6;
+}
+
+.click-to-enlarge {
+  position: absolute;
+  color: #fff;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px 0 #000;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.carousel-img-box:hover .click-to-enlarge {
+  opacity: 1;
+}
+
+.carousel-details {
+  padding: 15px;
+}
+
+.proj-title {
+  font-size: 1.6rem;
+  margin: 0 0 5px 0;
+  color: #000;
+}
+
+.proj-tech {
+  color: #005500;
+  margin: 0 0 10px 0;
+  font-size: 1.1rem;
+}
+
+.proj-desc {
+  font-size: 1.1rem;
+  color: #333;
+  margin: 0;
+}
+
+.carousel-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background: #333;
+  border: 2px solid #fff;
+}
+
+.dot.active {
+  background: #55ff55;
+}
+
+
+/* --- WIREFRAMES --- */
+.wireframe-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.wireframe-card {
+  background: #8b8b8b;
+  border: 3px solid #373737;
+  padding: 10px;
+  cursor: pointer;
+  box-shadow: inset 2px 2px 0 #fff, inset -2px -2px 0 #555;
+}
+
+.wireframe-card:hover {
+  background: #9b9b9b;
+}
+
+.wireframe-img-box {
+  background: #fff;
+  border: 2px solid #555;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.wireframe-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.wireframe-title {
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #000;
+  margin: 10px 0 0 0;
+}
+
+/* --- LIGHTBOX (Viewing large photos) --- */
+.lightbox-content {
+  background: rgba(0,0,0,0.8);
+  border: none;
+  width: auto;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.lightbox-img {
+  max-width: 100%;
+  max-height: 80vh;
+  border: 4px solid #fff;
+}
+
+.mt-10 {
+  margin-top: 15px;
+}
+
+/* --- RESPONSIVENESS --- */
+@media (max-width: 768px) {
+  .carousel-wrapper {
+    flex-direction: column;
+  }
+  .carousel-view {
+    width: 100%;
+  }
+  .carousel-img-box {
+    height: 200px;
+  }
+  .wireframe-grid {
+    grid-template-columns: 1fr;
+  }
+  /* Ensure timeline scrolls on mobile */
+  .timeline-track {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
 }
