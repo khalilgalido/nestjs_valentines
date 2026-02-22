@@ -25,7 +25,7 @@ function Gallery() {
   const [activeTab, setActiveTab] = useState('Me');
   const [selectedImg, setSelectedImg] = useState(null);
 
-  // --- DATA STRUCTURE ---
+
   const galleryData = {
     'Me': [
       { src: me1, caption: "ya boi" },
